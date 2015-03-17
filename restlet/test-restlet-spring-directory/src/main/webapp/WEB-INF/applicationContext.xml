@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="myComponent" class="org.restlet.ext.spring.SpringComponent">
+		<property name="defaultTarget" ref="router" />
+	</bean>
+
+	<!-- bean id="myApplication" class="test.TestApplication">
+		<property name="root" ref="router" />
+	</bean-->
+
+	<!-- Define the router -->
+	<bean name="router" class="org.restlet.ext.spring.SpringRouter">
+		<!-- constructor-arg ref="trackerComponentChildContext" / -->
+		<property name="attachments">
+			<map>
+				<entry key="/ping">
+					<bean class="org.restlet.ext.spring.SpringFinder">
+						<lookup-method name="create" bean="pingServerResource" />
+					</bean>
+				</entry>
+				<entry key="/dir" value-ref="staticsDirectory" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="pingServerResource" class="test.TestServerResource"></bean>
+
+	<!-- bean id="context" class="org.restlet.Context"> <lookup-method name="getContext" 
+		bean="myApplication" /> </bean -->
+
+	<!-- <bean id="context" class="test.ApplicationContextFactoryBean"> -->
+	<!-- <property name="application" ref="myApplication"/> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="staticsDirectory" class="org.restlet.resource.Directory"> -->
+	<!-- <constructor-arg ref="context"/> -->
+	<!-- <constructor-arg value="war:///" /> -->
+	<!-- <property name="listingAllowed" value="true" /> -->
+	<!-- </bean> -->
+
+	<bean id="staticsDirectory" class="test.DirectoryFactoryBean">
+		<property name="component" ref="myComponent" />
+	</bean>
+
+</beans>

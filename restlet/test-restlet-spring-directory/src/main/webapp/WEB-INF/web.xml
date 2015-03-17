@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="myApplication" version="2.5">
+	<display-name>My Application</display-name>
+
+	<context-param>
+		<param-name>org.restlet.application</param-name>
+		<param-value>org.restlet.tutorial.MyApplication</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/applicationContext.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- <servlet> -->
+	<!-- <servlet-name>ServerServlet</servlet-name> -->
+	<!-- <servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class> -->
+	<!-- <init-param> -->
+	<!-- <param-name>org.restlet.clients</param-name> -->
+	<!-- <param-value>CLAP,HTTP</param-value> -->
+	<!-- </init-param -->
+	<!-- <init-param> -->
+	<!-- <param-name>org.restlet.application</param-name> -->
+	<!-- <param-value>test.TestApplication</param-value> -->
+	<!-- </init-param> -->
+	<!-- </servlet> -->
+
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>ServerServlet</servlet-name> -->
+	<!-- <url-pattern>/*</url-pattern> -->
+	<!-- </servlet-mapping> -->
+
+	<servlet>
+		<servlet-name>tracker</servlet-name>
+		<servlet-class>test.CustomSpringServerServlet</servlet-class>
+		<!-- init-param>
+			<param-name>org.restlet.application</param-name>
+			<param-value>myApplication</param-value>
+		</init-param -->
+		<init-param>
+			<param-name>org.restlet.component</param-name>
+			<param-value>myComponent</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.restlet.clients</param-name>
+			<param-value>HTTP HTTPS FILE</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>tracker</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
+</web-app>

@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>stackoverflow</groupId>
+	<artifactId>test-restlet-cookies-servlet</artifactId>
+	<packaging>war</packaging>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<java-version>1.7</java-version>
+		<restlet-version>2.3.1</restlet-version>
+		<wtp-version>2.0</wtp-version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+            <groupId>org.restlet.jee</groupId>
+            <artifactId>org.restlet</artifactId>
+            <version>${restlet-version}</version>
+        </dependency>
+
+		<dependency>
+            <groupId>org.restlet.jee</groupId>
+            <artifactId>org.restlet.ext.servlet</artifactId>
+            <version>${restlet-version}</version>
+        </dependency>
+
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>maven-restlet</id>
+			<name>Public online Restlet repository</name>
+			<url>http://maven.restlet.com</url>
+		</repository>
+	</repositories>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java-version}</source>
+					<target>${java-version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>install</id>
+						<phase>install</phase>
+						<goals>
+							<goal>sources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpapplicationxml>true</wtpapplicationxml>
+					<wtpversion>${wtp-version}</wtpversion>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
